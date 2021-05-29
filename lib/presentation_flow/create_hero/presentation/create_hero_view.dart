@@ -23,7 +23,6 @@ class _CreateHeroState extends State<CreateHero> {
     if (_nameController.text.isEmpty ||
         _classController.text.isEmpty ||
         _pickedImage == null) {
-      print(_nameController.text + _classController.text + _pickedImage.path);
       return;
     }
 

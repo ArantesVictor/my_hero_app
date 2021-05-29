@@ -33,4 +33,10 @@ class HeroDataBaseImpl implements HeroDataBase {
   HeroModel searchById(id) {
     return _items.firstWhere((element) => identical(element.id, id));
   }
+
+  @override
+  bool deleteById(id) {
+    return _items
+        .remove(_items.firstWhere((element) => identical(element.id, id)));
+  }
 }

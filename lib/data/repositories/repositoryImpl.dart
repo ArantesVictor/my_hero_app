@@ -48,4 +48,9 @@ class RepositoryImpl implements Repository {
   HeroModel getHeroSelected() {
     return dataBase.searchById(flowState.heroSelected);
   }
+
+  @override
+  bool deleteHeroSelected() {
+    return dataBase.deleteById(flowState.heroSelected);
+  }
 }

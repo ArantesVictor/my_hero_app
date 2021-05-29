@@ -33,7 +33,6 @@ class HomeView extends StatelessWidget {
 
                       Navigator.of(context).pushNamed(
                         AppRoutes.READ_HERO,
-                        arguments: heroProvider.itemByIndex(i),
                       );
                     },
                   ),

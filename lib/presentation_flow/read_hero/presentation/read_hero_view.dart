@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:my_hero_app/common/widget/image_imput.dart';
 import 'package:my_hero_app/domain/interactors/hero_provider.dart';
 import 'package:my_hero_app/domain/model/hero_model.dart';
+import 'package:my_hero_app/presentation_flow/router/app_routes.dart';
 
 class ReadHero extends StatefulWidget {
   //interacgtor paacbuscar o hero selecionado
@@ -54,15 +55,19 @@ class _ReadHeroState extends State<ReadHero> {
                   style: TextButton.styleFrom(
                     primary: Colors.red,
                   ),
-                  onPressed: () {},
                   child: Text('Delete'),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(AppRoutes.DELETE_HERO);
+                  },
                 ),
                 TextButton(
                   style: TextButton.styleFrom(
                     primary: Theme.of(context).accentColor,
                   ),
-                  onPressed: () {},
                   child: Text('Edit'),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(AppRoutes.UPDATE_HERO);
+                  },
                 ),
               ],
             )
