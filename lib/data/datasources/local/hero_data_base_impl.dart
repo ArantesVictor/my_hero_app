@@ -28,4 +28,9 @@ class HeroDataBaseImpl implements HeroDataBase {
     //   'image': newCharacter.image.path,
     // });
   }
+
+  @override
+  HeroModel searchById(id) {
+    return _items.firstWhere((element) => identical(element.id, id));
+  }
 }

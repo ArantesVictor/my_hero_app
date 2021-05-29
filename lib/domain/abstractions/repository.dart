@@ -8,4 +8,5 @@ abstract class Repository {
   List<HeroModel> getHeroList();
   void addHero(String name, String classe, File image);
   void updateHeroSelected(String heroId);
+  HeroModel getHeroSelected();
 }

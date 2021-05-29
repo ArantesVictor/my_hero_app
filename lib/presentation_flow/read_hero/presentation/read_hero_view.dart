@@ -1,5 +1,8 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:my_hero_app/common/widget/image_imput.dart';
+import 'package:my_hero_app/domain/interactors/hero_provider.dart';
 import 'package:my_hero_app/domain/model/hero_model.dart';
 
 class ReadHero extends StatefulWidget {
@@ -13,7 +16,7 @@ class ReadHero extends StatefulWidget {
 class _ReadHeroState extends State<ReadHero> {
   @override
   Widget build(BuildContext context) {
-    HeroModel _myHero = ModalRoute.of(context).settings.arguments;
+    HeroModel _myHero = HeroProvider().itemHeroSelected();
     return Scaffold(
       appBar: AppBar(
         title: Text(_myHero.name),
@@ -30,16 +33,12 @@ class _ReadHeroState extends State<ReadHero> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        width: 200,
+                        width: 300,
                         height: 200,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            width: 1,
-                            color: Colors.grey,
-                          ),
+                        child: Image.file(
+                          _myHero.image,
+                          fit: BoxFit.cover,
                         ),
-                        alignment: Alignment.center,
-                        child: Text('salve'),
                       ),
                     ],
                   ),
@@ -48,12 +47,24 @@ class _ReadHeroState extends State<ReadHero> {
                 ],
               ),
             ),
-            TextButton(
-              style: TextButton.styleFrom(
-                primary: Colors.red,
-              ),
-              onPressed: () {},
-              child: Text('Delete'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                  style: TextButton.styleFrom(
+                    primary: Colors.red,
+                  ),
+                  onPressed: () {},
+                  child: Text('Delete'),
+                ),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    primary: Theme.of(context).accentColor,
+                  ),
+                  onPressed: () {},
+                  child: Text('Edit'),
+                ),
+              ],
             )
           ],
         ),

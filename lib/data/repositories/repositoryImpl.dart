@@ -43,4 +43,9 @@ class RepositoryImpl implements Repository {
   void addHero(String name, String classe, File image) {
     dataBase.addHero(name, classe, image);
   }
+
+  @override
+  HeroModel getHeroSelected() {
+    return dataBase.searchById(flowState.heroSelected);
+  }
 }

@@ -6,6 +6,8 @@ import 'package:my_hero_app/presentation_flow/home/domain/abstractions/fetch_her
 import 'package:my_hero_app/presentation_flow/home/domain/abstractions/update_hero_selected_use_case.dart';
 import 'package:my_hero_app/presentation_flow/home/domain/interactors/fetch_hero_list_interactor.dart';
 import 'package:my_hero_app/presentation_flow/home/domain/interactors/update_hero_selected_interactor.dart';
+import 'package:my_hero_app/domain/abstractions/fetch_hero_selected_use_case.dart';
+import 'package:my_hero_app/domain/interactors/fetch_hero_selected_interactor.dart';
 
 class Inject {
   static Repository getRepository() {
@@ -14,6 +16,10 @@ class Inject {
 
   static FetchHeroListUseCase getFetchHeroListInteactor() {
     return FetchHeroListInteractor();
+  }
+
+  static FetchHeroSelectedUseCase getFetchHeroSelectedInteactor() {
+    return FetchHeroSelectedInteractor();
   }
 
   static UpdateHeroSelectedUseCase getUpdateHeroSelectedInteractor() {

@@ -17,28 +17,27 @@ class HomeView extends StatelessWidget {
           child: Center(
             child: Text('No Hero Was Create Yet'),
           ),
-          builder: (ctx, charterProvider, child) =>
-              charterProvider.itensCount == 0
-                  ? child
-                  : ListView.builder(
-                      itemCount: charterProvider.itensCount.toInt(),
-                      itemBuilder: (ctx, i) => ListTile(
-                        leading: CircleAvatar(
-                          backgroundImage:
-                              FileImage(charterProvider.itemByIndex(i).image),
-                        ),
-                        title: Text(charterProvider.itemByIndex(i).name),
-                        onTap: () {
-                          charterProvider.updateSelectedHero(
-                              charterProvider.itemByIndex(i).id);
-
-                          Navigator.of(context).pushNamed(
-                            AppRoutes.READ_HERO,
-                            arguments: charterProvider.itemByIndex(i),
-                          );
-                        },
-                      ),
+          builder: (ctx, heroProvider, child) => heroProvider.itensCount == 0
+              ? child
+              : ListView.builder(
+                  itemCount: heroProvider.itensCount.toInt(),
+                  itemBuilder: (ctx, i) => ListTile(
+                    leading: CircleAvatar(
+                      backgroundImage:
+                          FileImage(heroProvider.itemByIndex(i).image),
                     ),
+                    title: Text(heroProvider.itemByIndex(i).name),
+                    onTap: () {
+                      heroProvider
+                          .updateSelectedHero(heroProvider.itemByIndex(i).id);
+
+                      Navigator.of(context).pushNamed(
+                        AppRoutes.READ_HERO,
+                        arguments: heroProvider.itemByIndex(i),
+                      );
+                    },
+                  ),
+                ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
