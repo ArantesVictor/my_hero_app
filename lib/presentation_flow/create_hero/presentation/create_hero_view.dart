@@ -13,7 +13,6 @@ class CreateHero extends StatefulWidget {
 
 class _CreateHeroState extends State<CreateHero> {
   final _nameController = TextEditingController();
-  final _classController = TextEditingController();
   String _classSelectedController;
 
   var _dropdowList;
@@ -30,15 +29,13 @@ class _CreateHeroState extends State<CreateHero> {
   }
 
   void _submitForm() {
-    if (_nameController.text.isEmpty ||
-        _classController.text.isEmpty ||
-        _pickedImage == null) {
+    if (_nameController.text.isEmpty || _pickedImage == null) {
       return;
     }
 
     Provider.of<HeroProvider>(context, listen: false).addHero(
       _nameController.text,
-      _classController.text,
+      _classSelectedController,
       _pickedImage,
     );
 
@@ -83,13 +80,6 @@ class _CreateHeroState extends State<CreateHero> {
                     controller: _nameController,
                     decoration: InputDecoration(
                       labelText: 'Nome',
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  TextField(
-                    controller: _classController,
-                    decoration: InputDecoration(
-                      labelText: 'Classe',
                     ),
                   ),
                   SizedBox(height: 10),
