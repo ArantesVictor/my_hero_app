@@ -14,18 +14,20 @@ class CreateHero extends StatefulWidget {
 class _CreateHeroState extends State<CreateHero> {
   final _nameController = TextEditingController();
   final _classController = TextEditingController();
-  // String _classSelectedController = 'Select...';
+  String _classSelectedController;
 
-  final List<String> _listClass = [];
+  var _dropdowList;
+  bool flag = true;
+  List<String> _listClass = [];
   File _pickedImage;
 
   void _selectImage(File pickedImage) {
     _pickedImage = pickedImage;
   }
 
-  // void _dropdownController() {
-  //   return;
-  // }
+  void _dropdownController() {
+    return;
+  }
 
   void _submitForm() {
     if (_nameController.text.isEmpty ||
@@ -45,11 +47,23 @@ class _CreateHeroState extends State<CreateHero> {
 
   @override
   Widget build(BuildContext context) {
-    // setState(() {
-    HeroProvider().getClasses().then((value) {
-      _listClass.addAll(value);
-    });
-    // });
+    if (flag) {
+      HeroProvider().getClasses().then((value) {
+        if (flag) {
+          setState(() {
+            _listClass.addAll(value);
+            _classSelectedController = _listClass[0];
+          });
+        }
+      });
+    }
+    _dropdowList = _listClass.map((balr) {
+      flag = false;
+      return DropdownMenuItem<String>(
+        value: balr,
+        child: Text(balr),
+      );
+    }).toList();
 
     return Scaffold(
       appBar: AppBar(
@@ -78,23 +92,18 @@ class _CreateHeroState extends State<CreateHero> {
                       labelText: 'Classe',
                     ),
                   ),
-                  // SizedBox(height: 10),
-                  // DropdownButton<String>(
-                  //   items: _listClass.map((DropdownStringItem) {
-                  //     return DropdownMenuItem<String>(
-                  //       value: DropdownStringItem,
-                  //       child: Text(DropdownStringItem),
-                  //     );
-                  //   }).toList(),
-                  //   onChanged: (String newValue) {
-                  //     setState(() {
-                  //       this._classSelectedController = newValue;
-                  //     });
-                  //   },
-                  //   value: _classSelectedController,
-                  //   onTap: _dropdownController,
-                  // ),
-                  // SizedBox(height: 40),
+                  SizedBox(height: 10),
+                  DropdownButton<String>(
+                    items: _dropdowList,
+                    onChanged: (String newValue) {
+                      setState(() {
+                        this._classSelectedController = newValue;
+                      });
+                    },
+                    value: _classSelectedController,
+                    onTap: _dropdownController,
+                  ),
+                  SizedBox(height: 40),
                 ],
               ),
             ),
