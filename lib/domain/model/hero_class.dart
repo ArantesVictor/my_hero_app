@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 
 class HeroClass {
-  final String className;
+  final String index;
+  final String name;
+  final String url;
 
-  HeroClass({@required this.className});
+  HeroClass({
+    @required this.index,
+    @required this.name,
+    @required this.url,
+  });
 }

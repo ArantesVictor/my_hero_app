@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_hero_app/domain/interactors/hero_provider.dart';
 import 'package:my_hero_app/domain/model/hero_model.dart';
-import 'package:my_hero_app/presentation_flow/router/app_routes.dart';
 import 'package:provider/provider.dart';
 
 class DeleteHeroView extends StatelessWidget {

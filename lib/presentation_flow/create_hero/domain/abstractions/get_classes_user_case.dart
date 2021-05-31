@@ -1,5 +1,5 @@
-import 'package:my_hero_app/domain/model/hero_classes.dart';
+import 'package:my_hero_app/domain/model/hero_class.dart';
 
 abstract class GetClassesUserCase {
-  HeroClasses getClasses();
+  Future<List<HeroClass>> getClasses();
 }

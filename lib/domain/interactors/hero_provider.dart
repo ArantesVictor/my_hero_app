@@ -1,9 +1,11 @@
 import 'dart:io';
-import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:my_hero_app/di/inject.dart';
+import 'package:my_hero_app/domain/model/hero_class.dart';
 import 'package:my_hero_app/domain/model/hero_model.dart';
+import 'package:my_hero_app/presentation_flow/create_hero/domain/abstractions/get_classes_user_case.dart';
+import 'package:my_hero_app/presentation_flow/create_hero/domain/interactors/get_classes_interactor.dart';
 import 'package:my_hero_app/presentation_flow/delete_hero/domain/abstractions/delete_hero_selected_use_case.dart';
 import 'package:my_hero_app/presentation_flow/delete_hero/domain/interactors/delete_hero_selected_interactor.dart';
 import 'package:my_hero_app/presentation_flow/home/domain/abstractions/fetch_hero_list_use_case.dart';
@@ -21,6 +23,7 @@ class HeroProvider with ChangeNotifier {
       Inject.getFetchHeroSelectedInteactor();
   final DeleteHeroSelectedUseCase deleteHeroSelectedInteractor =
       DeleteHeroSelectedInteractor();
+  final GetClassesUserCase getClassesInteractor = GetClassesInteractor();
 
   List<HeroModel> get item {
     return heroListInteractor.getHeroList();
@@ -51,5 +54,16 @@ class HeroProvider with ChangeNotifier {
     if (deleteHeroSelectedInteractor.deleteHeroSelected()) {
       notifyListeners();
     }
+  }
+
+  Future<List<String>> getClasses() async {
+    final List<HeroClass> response = await getClassesInteractor.getClasses();
+    final List<String> allClasses = [];
+    if (response != null) {
+      response.forEach((element) {
+        allClasses.add(element.name);
+      });
+    }
+    return allClasses;
   }
 }

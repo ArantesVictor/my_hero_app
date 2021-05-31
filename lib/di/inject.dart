@@ -1,5 +1,7 @@
 import 'package:my_hero_app/data/datasources/local/hero_data_base.dart';
 import 'package:my_hero_app/data/datasources/local/hero_data_base_impl.dart';
+import 'package:my_hero_app/data/datasources/web/hero_services.dart';
+import 'package:my_hero_app/data/datasources/web/hero_services_impl.dart';
 import 'package:my_hero_app/data/repositories/repositoryImpl.dart';
 import 'package:my_hero_app/domain/abstractions/repository.dart';
 import 'package:my_hero_app/presentation_flow/home/domain/abstractions/fetch_hero_list_use_case.dart';
@@ -28,5 +30,9 @@ class Inject {
 
   static HeroDataBase getHeroDataBase() {
     return HeroDataBaseImpl();
+  }
+
+  static HeroServices getHeroServices() {
+    return HeroServicesImpl();
   }
 }

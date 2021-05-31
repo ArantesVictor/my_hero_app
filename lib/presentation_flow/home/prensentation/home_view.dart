@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_hero_app/di/inject.dart';
-import 'package:my_hero_app/presentation_flow/home/domain/interactors/fetch_hero_list_interactor.dart';
 import 'package:my_hero_app/domain/interactors/hero_provider.dart';
 import 'package:my_hero_app/presentation_flow/router/app_routes.dart';
 import 'package:provider/provider.dart';
