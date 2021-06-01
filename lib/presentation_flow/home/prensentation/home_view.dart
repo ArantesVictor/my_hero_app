@@ -9,6 +9,14 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Home'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.article_outlined),
+            onPressed: () {
+              Navigator.of(context).pushNamed(AppRoutes.INFO_CLASS);
+            },
+          ),
+        ],
       ),
       body: Center(
         child: Consumer<HeroProvider>(

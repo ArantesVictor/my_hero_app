@@ -51,7 +51,6 @@ class _CreateHeroState extends State<CreateHero> {
             _listClass.addAll(value);
             _classSelectedController = _listClass[0];
             _flag = false;
-            HeroProvider().updateSelectedHero('');
           });
         }
       });
