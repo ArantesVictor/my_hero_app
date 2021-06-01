@@ -16,7 +16,7 @@ class _CreateHeroState extends State<CreateHero> {
   String _classSelectedController;
 
   var _dropdowList;
-  bool flag = true;
+  bool _flag = true;
   List<String> _listClass = [];
   File _pickedImage;
 
@@ -44,18 +44,19 @@ class _CreateHeroState extends State<CreateHero> {
 
   @override
   Widget build(BuildContext context) {
-    if (flag) {
+    if (_flag) {
       HeroProvider().getClasses().then((value) {
-        if (flag) {
+        if (_flag) {
           setState(() {
             _listClass.addAll(value);
             _classSelectedController = _listClass[0];
+            _flag = false;
+            HeroProvider().updateSelectedHero('');
           });
         }
       });
     }
     _dropdowList = _listClass.map((balr) {
-      flag = false;
       return DropdownMenuItem<String>(
         value: balr,
         child: Text(balr),
@@ -66,47 +67,49 @@ class _CreateHeroState extends State<CreateHero> {
       appBar: AppBar(
         title: Text("Create Hero"),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(10),
+      body: _flag
+          ? Center(child: CircularProgressIndicator())
+          : SingleChildScrollView(
               child: Column(
                 children: [
-                  SizedBox(height: 10),
-                  ImageInput(this._selectImage),
-                  SizedBox(height: 10),
-                  TextField(
-                    controller: _nameController,
-                    decoration: InputDecoration(
-                      labelText: 'Nome',
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Column(
+                      children: [
+                        SizedBox(height: 10),
+                        ImageInput(this._selectImage),
+                        SizedBox(height: 10),
+                        TextField(
+                          controller: _nameController,
+                          decoration: InputDecoration(
+                            labelText: 'Nome',
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        DropdownButton<String>(
+                          items: _dropdowList,
+                          onChanged: (String newValue) {
+                            setState(() {
+                              this._classSelectedController = newValue;
+                            });
+                          },
+                          value: _classSelectedController,
+                          onTap: _dropdownController,
+                        ),
+                        SizedBox(height: 40),
+                      ],
                     ),
                   ),
-                  SizedBox(height: 10),
-                  DropdownButton<String>(
-                    items: _dropdowList,
-                    onChanged: (String newValue) {
-                      setState(() {
-                        this._classSelectedController = newValue;
-                      });
-                    },
-                    value: _classSelectedController,
-                    onTap: _dropdownController,
-                  ),
-                  SizedBox(height: 40),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      primary: Colors.blue,
+                    ),
+                    onPressed: _submitForm,
+                    child: Text('Salvar'),
+                  )
                 ],
               ),
             ),
-            TextButton(
-              style: TextButton.styleFrom(
-                primary: Colors.blue,
-              ),
-              onPressed: _submitForm,
-              child: Text('Salvar'),
-            )
-          ],
-        ),
-      ),
     );
   }
 }

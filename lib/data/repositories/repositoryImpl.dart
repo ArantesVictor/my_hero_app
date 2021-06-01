@@ -56,4 +56,9 @@ class RepositoryImpl implements Repository {
   bool deleteHeroSelected() {
     return dataBase.deleteById(flowState.heroSelected);
   }
+
+  @override
+  void updateHero(String name, String classe, File image) {
+    dataBase.updateHero(flowState.heroSelected, name, classe, image);
+  }
 }

@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 
 class HeroModel {
   final String id;
-  final String name;
-  final String classe;
-  final File image;
+  String name;
+  String classe;
+  File image;
 
   HeroModel({
     @required this.id,

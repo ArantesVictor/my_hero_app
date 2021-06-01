@@ -11,48 +11,47 @@ class DeleteHeroView extends StatelessWidget {
       appBar: AppBar(
         title: Text('Delete hero ${_myHero.name} '),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'You heave shure abolt delete the ${_myHero.name}?',
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'You shure abolt delete the ${_myHero.name}?',
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                style: TextButton.styleFrom(
+                  primary: Colors.red,
                 ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextButton(
-                  style: TextButton.styleFrom(
-                    primary: Colors.red,
-                  ),
-                  child: Text('Delete'),
-                  onPressed: () {
-                    Provider.of<HeroProvider>(
-                      context,
-                      listen: false,
-                    ).deleteHeroSelected();
-                    Navigator.of(context).pop();
-                    Navigator.of(context).pop();
-                  },
+                child: Text('Delete'),
+                onPressed: () {
+                  Provider.of<HeroProvider>(
+                    context,
+                    listen: false,
+                  ).deleteHeroSelected();
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pop();
+                },
+              ),
+              TextButton(
+                style: TextButton.styleFrom(
+                  primary: Theme.of(context).accentColor,
                 ),
-                TextButton(
-                  style: TextButton.styleFrom(
-                    primary: Theme.of(context).accentColor,
-                  ),
-                  child: Text('Cancel'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            )
-          ],
-        ),
+                child: Text('Cancel'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          )
+        ],
       ),
     );
   }

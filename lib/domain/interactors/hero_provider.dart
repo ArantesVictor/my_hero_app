@@ -11,6 +11,8 @@ import 'package:my_hero_app/presentation_flow/delete_hero/domain/interactors/del
 import 'package:my_hero_app/presentation_flow/home/domain/abstractions/fetch_hero_list_use_case.dart';
 import 'package:my_hero_app/presentation_flow/home/domain/abstractions/update_hero_selected_use_case.dart';
 import 'package:my_hero_app/domain/abstractions/fetch_hero_selected_use_case.dart';
+import 'package:my_hero_app/presentation_flow/update_hero/domain/abistractions/update_hero_use_case.dart';
+import 'package:my_hero_app/presentation_flow/update_hero/domain/interactors/update_hero_interactor.dart';
 
 //cassos de uso interactor
 
@@ -24,6 +26,8 @@ class HeroProvider with ChangeNotifier {
   final DeleteHeroSelectedUseCase deleteHeroSelectedInteractor =
       DeleteHeroSelectedInteractor();
   final GetClassesUserCase getClassesInteractor = GetClassesInteractor();
+
+  final UpdatehHeroUseCase updateHeroInteractor = UpdateHeroInteractor();
 
   List<HeroModel> get item {
     return heroListInteractor.getHeroList();
@@ -65,5 +69,10 @@ class HeroProvider with ChangeNotifier {
       });
     }
     return allClasses;
+  }
+
+  void updateHero(String name, String classe, File image) {
+    updateHeroInteractor.updateHero(name, classe, image);
+    notifyListeners();
   }
 }

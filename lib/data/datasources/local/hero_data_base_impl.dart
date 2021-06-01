@@ -21,12 +21,6 @@ class HeroDataBaseImpl implements HeroDataBase {
       image: image,
     );
     _items.add(newCharacter);
-    // DataBaseUtil.inserts('character', {
-    //   'id': newCharacter.id,
-    //   'name': newCharacter.name,
-    //   'class': newCharacter.classe,
-    //   'image': newCharacter.image.path,
-    // });
   }
 
   @override
@@ -38,5 +32,12 @@ class HeroDataBaseImpl implements HeroDataBase {
   bool deleteById(id) {
     return _items
         .remove(_items.firstWhere((element) => identical(element.id, id)));
+  }
+
+  @override
+  void updateHero(String id, String name, String classe, File image) {
+    _items.firstWhere((element) => identical(element.id, id)).name = name;
+    _items.firstWhere((element) => identical(element.id, id)).classe = classe;
+    _items.firstWhere((element) => identical(element.id, id)).image = image;
   }
 }
