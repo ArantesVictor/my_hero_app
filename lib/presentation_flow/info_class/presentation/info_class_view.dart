@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_hero_app/domain/interactors/hero_provider.dart';
+import 'package:my_hero_app/domain/model/hero_base_equipment.dart';
+import 'package:provider/provider.dart';
 
 class InfoClassView extends StatefulWidget {
   @override
@@ -8,13 +10,26 @@ class InfoClassView extends StatefulWidget {
 
 class _InfoClassViewState extends State<InfoClassView> {
   bool _flag = true;
+  bool _flagDetail = false;
   List<String> _listClass = [];
+  List<String> _listEquipament = [];
   String _classSelectedController;
 
   var _dropdowList;
 
   void _dropdownController() {
-    return;
+    setState(() {
+      _flagDetail = true;
+    });
+
+    HeroProvider()
+      ..getBaseEquipament(_classSelectedController).then((value) {
+        _listEquipament = [];
+        setState(() {
+          _listEquipament.addAll(value);
+          _flagDetail = false;
+        });
+      });
   }
 
   @override
@@ -26,7 +41,6 @@ class _InfoClassViewState extends State<InfoClassView> {
             _listClass.addAll(value);
             _classSelectedController = _listClass[0];
             _flag = false;
-            print('Printssssssss');
           });
         }
       });
@@ -55,10 +69,24 @@ class _InfoClassViewState extends State<InfoClassView> {
                         setState(() {
                           this._classSelectedController = newValue;
                         });
+                        _dropdownController();
                       },
                       value: _classSelectedController,
-                      onTap: _dropdownController,
                     ),
+                  ],
+                ),
+                SizedBox(height: 20),
+                Text('Equipamentos:'),
+                SizedBox(height: 20),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _flagDetail
+                        ? Center(child: CircularProgressIndicator())
+                        : _listEquipament.isEmpty
+                            ? Text('')
+                            : Text(_listEquipament[0]),
                   ],
                 ),
                 SizedBox(height: 20),

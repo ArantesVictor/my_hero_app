@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:my_hero_app/di/inject.dart';
+import 'package:my_hero_app/domain/model/hero_base_equipment.dart';
 import 'package:my_hero_app/domain/model/hero_class.dart';
 import 'package:my_hero_app/domain/model/hero_model.dart';
 import 'package:my_hero_app/presentation_flow/create_hero/domain/abstractions/get_classes_user_case.dart';
@@ -11,6 +12,8 @@ import 'package:my_hero_app/presentation_flow/delete_hero/domain/interactors/del
 import 'package:my_hero_app/presentation_flow/home/domain/abstractions/fetch_hero_list_use_case.dart';
 import 'package:my_hero_app/presentation_flow/home/domain/abstractions/update_hero_selected_use_case.dart';
 import 'package:my_hero_app/domain/abstractions/fetch_hero_selected_use_case.dart';
+import 'package:my_hero_app/presentation_flow/info_class/domain/abstractions/base_equipament_hero_use_case.dart';
+import 'package:my_hero_app/presentation_flow/info_class/domain/interactors/base_equipament_hero_interactor.dart';
 import 'package:my_hero_app/presentation_flow/update_hero/domain/abistractions/update_hero_use_case.dart';
 import 'package:my_hero_app/presentation_flow/update_hero/domain/interactors/update_hero_interactor.dart';
 
@@ -28,6 +31,9 @@ class HeroProvider with ChangeNotifier {
   final GetClassesUserCase getClassesInteractor = GetClassesInteractor();
 
   final UpdatehHeroUseCase updateHeroInteractor = UpdateHeroInteractor();
+
+  final BaseEquipamentHeroUseCase baseEquipamentHeroInteractor =
+      BaseEquipamentHeroInteractor();
 
   List<HeroModel> get item {
     return heroListInteractor.getHeroList();
@@ -62,7 +68,7 @@ class HeroProvider with ChangeNotifier {
 
   Future<List<String>> getClasses() async {
     final List<HeroClass> response = await getClassesInteractor.getClasses();
-    final List<String> allClasses = [];
+    List<String> allClasses = [];
     if (response != null) {
       response.forEach((element) {
         allClasses.add(element.name);
@@ -74,5 +80,18 @@ class HeroProvider with ChangeNotifier {
   void updateHero(String name, String classe, File image) {
     updateHeroInteractor.updateHero(name, classe, image);
     notifyListeners();
+  }
+
+  Future<List<String>> getBaseEquipament(String classe) async {
+    final List<HeroBaseEquipament> response =
+        await baseEquipamentHeroInteractor.getBaseEquipament(classe);
+    ;
+    List<String> equipament = [];
+    if (response != null) {
+      response.forEach((element) {
+        equipament.add(element.equipment.name);
+      });
+    }
+    return equipament;
   }
 }

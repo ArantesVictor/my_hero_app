@@ -5,6 +5,7 @@ import 'package:my_hero_app/data/datasources/web/hero_services.dart';
 import 'package:my_hero_app/data/models/flow_state.dart';
 import 'package:my_hero_app/di/inject.dart';
 import 'package:my_hero_app/domain/abstractions/repository.dart';
+import 'package:my_hero_app/domain/model/hero_base_equipment.dart';
 import 'package:my_hero_app/domain/model/hero_class.dart';
 import 'package:my_hero_app/domain/model/hero_model.dart';
 
@@ -30,6 +31,11 @@ class RepositoryImpl implements Repository {
   @override
   Future<List<HeroClass>> getClasses() async {
     return await services.getAllClasses();
+  }
+
+  @override
+  Future<List<HeroBaseEquipament>> getBaseEquipament(String classe) async {
+    return await services.getEquipmentClass(classe);
   }
 
   @override
